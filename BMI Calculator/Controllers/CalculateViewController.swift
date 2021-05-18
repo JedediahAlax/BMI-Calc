@@ -8,8 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculateViewController: UIViewController {
 
+    var bmiValue = "0.0"
+    
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     
@@ -39,15 +41,17 @@ class ViewController: UIViewController {
         let weight = weightSliderLabel.value
         
         let bmi = weight / pow(height, 2)
+        bmiValue = String(format: "%.1f", bmi)
         
-        // Create object for second viewController
-        let secondVC = SecondViewController()
+        self.performSegue(withIdentifier: "goToResult", sender: self)
         
-        // assign the bmi to the second viewControllers bmiValue property, format to string because bmiValue is a string data type
-        secondVC.bmiValue = String(format: "%.1f", bmi)
-        
-        // present the second viewController
-        self.present(secondVC, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult" {
+            let desintationVC = segue.destination as! ResultsViewController
+            desintationVC.bmiValue = bmiValue
+        }
     }
 }
 
