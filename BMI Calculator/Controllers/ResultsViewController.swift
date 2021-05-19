@@ -11,6 +11,8 @@ import UIKit
 class ResultsViewController: UIViewController {
     
     var bmiValue: String?
+    var advice: String?
+    var color: UIColor?
     
     
 
@@ -22,6 +24,8 @@ class ResultsViewController: UIViewController {
         super.viewDidLoad()
         
         resultsLabel.text = bmiValue
+        adviceLabel.text = advice
+        view.backgroundColor = color
     }
     
     @IBAction func recalcBtnPressed(_ sender: UIButton) {
